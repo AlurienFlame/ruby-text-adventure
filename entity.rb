@@ -16,6 +16,11 @@ class Entity
 
   def hurt(value)
     @health -= value
+    if @health <= 0
+      puts "#{self} was killed!"
+      @battle.remove_from_initiative(self)
+      return
+    end
     puts "#{self} was hit for #{value} damage. (#{@health} health left)"
   end
 

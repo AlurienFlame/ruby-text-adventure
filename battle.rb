@@ -29,4 +29,12 @@ class Battle
 
   end
 
+  def remove_from_initiative(participant)
+    @participants.delete(participant)
+    puts "#{participant} is out of the fight."
+    if @participants.length == 1 # TODO: Later, check if there's only one *faction* remaining, instead
+      puts "#{@participants[0]} is victorious!"
+    end
+  end
+
 end
