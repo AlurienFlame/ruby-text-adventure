@@ -8,6 +8,7 @@ class Entity
     @health = 20
     @battle = nil
     @armor_class = 6
+    @main_hand = nil
   end
 
   def to_s
@@ -25,14 +26,26 @@ class Entity
   end
 
   def attack(target)
-    puts "#{self} attacking #{target.name}..."
+    puts "#{self} attacking #{target.name} with #{@main_hand}..."
 
     # Roll to hit
-    rolls = roll_dice("1d20")
-    puts rolls >= target.armor_class ? "Hit!" : "Miss!"
+    crit = false
+    to_hit = roll_dice("1d20")
+    if to_hit == 20
+      puts "Critial hit!"
+      crit = true
+    elseif to_hit >= target.armor_class
+      puts "Hit!"
+    else
+      puts "Miss!"
+      return
+    end
 
     # Roll damage
-    rolls = roll_dice("2d8")
-    target.hurt(rolls)
+    damage = roll_dice(@main_hand.damage)
+    if crit
+      damage *= 2
+    end
+    target.hurt(damage)
   end
 end

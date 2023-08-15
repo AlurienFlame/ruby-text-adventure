@@ -1,9 +1,11 @@
 require_relative "entity"
+require_relative "item/rusty_scimitar"
 
 class Goblin < Entity
   def initialize
     super("Goblin")
     @health = 8
+    @main_hand = RustyScimitar.new
   end
 
   def take_turn

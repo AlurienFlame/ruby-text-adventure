@@ -1,9 +1,11 @@
 require_relative "entity"
+require_relative "item/trusty_hatchet"
 
 class Player < Entity
   def initialize
     super("Player")
     @health = 50
+    @main_hand = TrustyHatchet.new
   end
 
   def attack(target_name=nil)
