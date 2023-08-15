@@ -5,7 +5,7 @@ module Observable
 
   def info
     # appearance
-    description = "A #{@name}."
+    description = "#{@name}."
 
     if @appearance
       description += " #{@appearance}"
@@ -28,6 +28,20 @@ module Observable
       end
     end
 
+    # child info
+    if @main_hand
+      description += indent("\n└#{@main_hand.info}")
+    end
+
+    if @actors
+      actor_info = @actors.map { |actor| actor.info }
+      description += indent("\n└#{actor_info.join("\n└")}")
+    end
+
     return description
+  end
+
+  def indent(str)
+    str.gsub(/^/, '  ')
   end
 end

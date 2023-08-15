@@ -40,7 +40,12 @@ class Player < Entity
       return
     end
 
-    target = @scene.actors.find { |entity| entity.name.downcase == target_name.downcase }
+    if target_name == ""
+      target = @scene
+    else
+      target = @scene.actors.find { |entity| entity.name.downcase == target_name.downcase }
+    end
+
     if target.nil?
       # Search equipment
       @scene.actors.each do |entity|
@@ -50,19 +55,13 @@ class Player < Entity
         end
       end
     end
-    
+
     if target.nil?
       puts "You don't see a \"#{target_name}\" around."
       return
     end
 
-    # Find info about target to print
-    if target.respond_to?(:info)
-      puts target.info
-    elsif target.respond_to?(:to_s)
-      puts target.to_s
-    elsif target.respond_to?(:inspect)
-      puts target.inspect
-    end
+    puts target.info
+    return
   end
 end
