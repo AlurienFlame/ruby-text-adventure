@@ -25,7 +25,7 @@ class Game
       exit 0
     when "roll"
       rolls = roll_dice(input[1])
-    when "look" # TODO: Command aliases
+    when "look", "inspect", "observe" # TODO: help command
       @player.look(input[1..-1].join(" "))
     when "attack"
       @player.attack(input[1])
