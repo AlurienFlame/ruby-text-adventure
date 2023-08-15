@@ -2,13 +2,12 @@ require_relative "battle"
 require_relative "entity"
 require_relative "die"
 require_relative "player"
-require_relative "npc"
+require_relative "goblin"
 
 class Game
   def initialize
     @player = Player.new
-    enemy = Npc.new("Creature")
-    battle = Battle.new([@player, enemy])
+    battle = Battle.new([@player, Goblin.new])
   end
 
   def prompt_input()
@@ -22,7 +21,7 @@ class Game
     when "roll"
       rolls = roll_dice(input[1])
     when "attack"
-      @player.attack()
+      @player.attack(input[1])
     else
       puts "Invalid command"
     end

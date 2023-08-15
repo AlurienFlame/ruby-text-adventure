@@ -34,7 +34,12 @@ class Battle
     puts "#{participant} is out of the fight."
     if @participants.length == 1 # TODO: Later, check if there's only one *faction* remaining, instead
       puts "#{@participants[0]} is victorious!"
+      exit 0
     end
+  end
+
+  def get_participant_by_name(name)
+    @participants.find { |participant| participant.name == name }
   end
 
 end
