@@ -3,11 +3,16 @@ require_relative "entity"
 require_relative "die"
 require_relative "player"
 require_relative "goblin"
+require_relative "scene"
 
 class Game
   def initialize
-    @player = Player.new
-    battle = Battle.new([@player, Goblin.new])
+    scene = Scene.new
+    @player = Player.new.place(scene)
+    goblin = Goblin.new.place(scene)
+
+
+    battle = Battle.new([@player, goblin])
   end
 
   def prompt_input()
@@ -20,6 +25,8 @@ class Game
       exit 0
     when "roll"
       rolls = roll_dice(input[1])
+    when "look" # TODO: Command aliases
+      @player.look(input[1])
     when "attack"
       @player.attack(input[1])
     else

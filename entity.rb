@@ -4,6 +4,7 @@ class Entity
   attr_accessor :battle, :name, :armor_class, :health
 
   def initialize(name)
+    @scene = nil
     @name = name
     @health = 20
     @battle = nil
@@ -47,5 +48,11 @@ class Entity
       damage *= 2
     end
     target.hurt(damage)
+  end
+
+  def place(scene)
+    @scene = scene
+    scene.add_entity(self)
+    return self
   end
 end

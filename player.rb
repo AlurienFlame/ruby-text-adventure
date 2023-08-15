@@ -32,4 +32,23 @@ class Player < Entity
 
     @battle.end_turn(self)
   end
+
+  def look(target_name)
+    # Ensure target exists
+    unless target_name
+      puts "Look at what?"
+      return
+    end
+
+    target = @scene.actors.find { |entity| entity.name.downcase == target_name.downcase }
+
+    # Find info about target to print
+    if target.respond_to?(:info)
+      puts target.info
+    elsif target.respond_to?(:to_s)
+      puts target.to_s
+    elsif target.respond_to?(:inspect)
+      puts target.inspect
+    end
+  end
 end
