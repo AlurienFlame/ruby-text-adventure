@@ -26,7 +26,7 @@ class Game
     when "roll"
       rolls = roll_dice(input[1])
     when "look" # TODO: Command aliases
-      @player.look(input[1])
+      @player.look(input[1..-1].join(" "))
     when "attack"
       @player.attack(input[1])
     else

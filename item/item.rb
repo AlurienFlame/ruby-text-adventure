@@ -1,5 +1,9 @@
+require_relative "../observable"
+
 class Item
-  attr_accessor :damage
+  include Observable
+  
+  attr_accessor :damage, :name
   def initialize(name)
     @name = name
     @damage = nil

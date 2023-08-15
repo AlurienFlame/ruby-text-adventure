@@ -4,8 +4,9 @@ require_relative "item/rusty_scimitar"
 class Goblin < Entity
   def initialize
     super("Goblin")
-    @health = 8
+    @health = @max_hp = 8
     @main_hand = RustyScimitar.new
+    @appearance = "A small, green humanoid with large teeth and pointed ears."
   end
 
   def take_turn

@@ -4,7 +4,7 @@ require_relative "item/trusty_hatchet"
 class Player < Entity
   def initialize
     super("Player")
-    @health = 50
+    @health = @max_hp = 50
     @main_hand = TrustyHatchet.new
   end
 
@@ -41,6 +41,20 @@ class Player < Entity
     end
 
     target = @scene.actors.find { |entity| entity.name.downcase == target_name.downcase }
+    if target.nil?
+      # Search equipment
+      @scene.actors.each do |entity|
+        if entity.main_hand.name.downcase == target_name.downcase
+          target = entity.main_hand
+          break
+        end
+      end
+    end
+    
+    if target.nil?
+      puts "You don't see a \"#{target_name}\" around."
+      return
+    end
 
     # Find info about target to print
     if target.respond_to?(:info)

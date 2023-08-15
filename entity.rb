@@ -1,19 +1,19 @@
 require_relative "die"
+require_relative "observable"
 
 class Entity
-  attr_accessor :battle, :name, :armor_class, :health
+  include Observable
+
+  attr_accessor :battle, :name, :armor_class, :health, :main_hand
 
   def initialize(name)
     @scene = nil
     @name = name
-    @health = 20
+    @health = @max_hp = nil
     @battle = nil
     @armor_class = 6
     @main_hand = nil
-  end
-
-  def to_s
-    @name
+    @appearance = nil
   end
 
   def hurt(value)
