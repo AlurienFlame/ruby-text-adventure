@@ -29,12 +29,10 @@ class Entity
 
     # Roll to hit
     rolls = roll_dice("1d20")
-    if rolls[0] < target.armor_class
-      puts "Miss!"
-    end
+    puts rolls >= target.armor_class ? "Hit!" : "Miss!"
 
     # Roll damage
-    rolls = roll_dice("1d8")
-    target.hurt(rolls[0])
+    rolls = roll_dice("2d8")
+    target.hurt(rolls)
   end
 end

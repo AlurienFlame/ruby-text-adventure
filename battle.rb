@@ -22,7 +22,7 @@ class Battle
       puts "Your turn."
       return
     end
-    
+
     # Otherwise, let the AI handle it
     puts "#{next_participant_to_act} takes their turn."
     next_participant_to_act.take_turn
